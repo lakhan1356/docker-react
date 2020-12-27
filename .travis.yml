@@ -1,3 +1,4 @@
+language: generic 
 sudo: required
 services:
   - docker
@@ -5,5 +6,8 @@ services:
 before_install:
   - docker build -t lakhanramnani/docker-react -f Dockerfile.dev .
 
+env:
+  "CI": "false"
+
 script:
-  - docker run lakhanramnani/docker-react set CI=true&&npm test -- --coverage 
+  - docker run -e CI=true lakhanramnani/docker-react npm run test
